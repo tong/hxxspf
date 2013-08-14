@@ -1,0 +1,10 @@
+{
+	"name" : "xspf",
+	"url" : "https://github.com/tong/hxxspf",
+	"license" : "Public",
+	"tags" : ["xspf","playlist","xiph"],
+	"description" : "XSPF/XML playlists format",
+	"version" : "1.0",
+	"releasenote": "Initial haxe 3 version",
+	"contributors": ["tong"]
+}
