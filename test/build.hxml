@@ -1,0 +1,8 @@
+
+-cp ../
+-main TestXSPF
+-resource playlist.xml@playlist
+--each
+
+--next
+-neko test.n
