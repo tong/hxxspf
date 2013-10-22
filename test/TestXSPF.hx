@@ -1,7 +1,9 @@
 
+import XSPFPlaylist;
+
 class TestXSPF extends haxe.unit.TestCase {
 	
-	static var pl = xspf.Playlist.parse( Xml.parse( haxe.Resource.getString( "playlist" ) ).firstElement() );
+	static var pl = XSPFPlaylist.parse( Xml.parse( haxe.Resource.getString( "playlist" ) ).firstElement() );
 
 	public function testParsePlaylist() {
 

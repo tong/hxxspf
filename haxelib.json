@@ -2,9 +2,9 @@
 	"name" : "xspf",
 	"url" : "https://github.com/tong/hxxspf",
 	"license" : "Public",
-	"tags" : ["xspf","playlist","xiph"],
-	"description" : "XSPF/XML playlists format",
-	"version" : "1.0",
-	"releasenote": "Initial haxe 3 version",
+	"tags" : ["xspf","playlist","xiph","spiff","xml","mp3","media","m3u"],
+	"description" : "XSPF/XML playlist format",
+	"version" : "1.1.0",
+	"releasenote": "See CHANGES",
 	"contributors": ["tong"]
 }
