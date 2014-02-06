@@ -1,5 +1,5 @@
 
--cp ../
+-cp ../src/
 -main TestXSPF
 -resource playlist.xml@playlist
 --each

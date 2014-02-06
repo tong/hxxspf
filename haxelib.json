@@ -4,7 +4,8 @@
 	"license" : "Public",
 	"tags" : ["xspf","playlist","xiph","spiff","xml","mp3","media","m3u"],
 	"description" : "XSPF/XML playlist format",
-	"version" : "1.1.0",
+	"version" : "1.1.1",
+	"classPath" : "src/",
 	"releasenote": "See CHANGES",
 	"contributors": ["tong"]
 }
