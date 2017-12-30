@@ -1,8 +1,45 @@
-
--cp ../src/
--main TestXSPF
+-lib xspf
+-lib utest
+-main Unit
+-dce no
 -resource playlist.xml@playlist
 --each
 
 --next
--neko test.n
+-cpp bin/cpp
+-cmd mv bin/cpp/Unit bin/unit
+
+--next
+-cs bin/cs
+-cmd mv bin/cs/bin/Unit.exe bin/unit.exe
+
+--next
+-hl bin/unit.hl
+
+#--next
+#-hl bin/unit.c
+#-cmd gcc -o bin/unit.hlc libhl.so bin/unit.c -I/home/tong/src/hl
+
+--next
+-java bin/java
+-cmd mv bin/java/Unit.jar bin/unit.jar
+
+--next
+-js bin/unit.js
+
+--next
+-lua bin/unit.lua
+
+--next
+-neko bin/unit.n
+
+--next
+-js bin/unit.node.js
+-lib hxnodejs
+
+--next
+-php bin
+-D php-front=unit.php
+
+--next
+-python bin/unit.py
