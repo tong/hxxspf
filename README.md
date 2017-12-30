@@ -1,4 +1,5 @@
-# HXXSPF [![Haxelib Version](https://img.shields.io/github/tag/tong/hxxspf.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/xspf.svg)
+
+# HXXSPF
 
 Haxe implementation of [XSPF](http://xspf.org/) ("spiff"), the XML format for sharing playlists.
 
@@ -11,3 +12,5 @@ Haxe implementation of [XSPF](http://xspf.org/) ("spiff"), the XML format for sh
 * Unlike M3U, XSPF is XML.
 * Unlike SMIL, XSPF is simple.
 * Unlike ASX, XSPF is open.
+
+[![Haxelib Version](https://img.shields.io/github/tag/tong/hxxspf.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/xspf.svg)
