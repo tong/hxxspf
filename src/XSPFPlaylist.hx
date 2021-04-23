@@ -35,7 +35,7 @@ class XSPFTrack {
 	 	xspf:track elements MAY contain zero or more location elements,
 	 	but a user-agent MUST NOT render more than one of the named resources.
 	*/
-	public var location : List<String>;
+	public var location : Array<String> = [];
 	
 	/**
 		Canonical ID for this resource.
@@ -101,30 +101,25 @@ class XSPFTrack {
 	 * The link element allows XSPF to be extended without the use of XML namespaces. 
 	 * xspf:track elements MAY contain zero or more link elements.
 	 */
-	public var link : List<Link>;
+	public var link : Array<Link> = [];
 	
 	/**
 	 	The meta element allows metadata fields to be added to xspf:track elements.
 	 	xspf:track elements MAY contain zero or more meta elements.
 	 */
-	public var meta : List<Meta>;
+	public var meta : Array<Meta> = [];
 	
 	/**
 	 	The extension element allows non-XSPF XML to be included in XSPF documents.
 	 	The purpose is to allow nested XML, which the meta and link elements do not.
 	*/
-	public var extension : List<Extension>;
+	public var extension : Array<Extension> = [];
 	
-	public function new() {
-		location = new List();
-		link = new List();
-		meta = new List();
-		extension = new List();
-	}
+	public function new() {}
 	
 	public function toXml() : Xml {
 		var x = Xml.createElement( "track" );
-		if( !location.isEmpty() )
+		if( location.length > 0 )
 			for( l in location )
 				x.addChild( Xml.parse( "<location>"+l+"</location>" )  );
 		XSPFPlaylist.attach( x, this, 'identifier' );
@@ -135,21 +130,21 @@ class XSPFTrack {
 		XSPFPlaylist.attach( x, this, 'album' );
 		XSPFPlaylist.attach( x, this, 'trackNum' );
 		XSPFPlaylist.attach( x, this, 'duration' );
-		if( !link.isEmpty() ) { 
+		if( link.length > 0 ) { 
 			for( e in link ) {
 				var l = XSPFPlaylist.createElement( "link", e.content );
 				l.set( "rel", e.rel );
 				x.addChild( l );
 			}
 		}
-		if( !meta.isEmpty() ) { 
+		if( meta.length > 0 ) { 
 			for( e in meta ) {
 				var m = XSPFPlaylist.createElement( "meta", e.content );
 				m.set( "rel", e.rel );
 				x.addChild( m );
 			}
 		}
-		if( !extension.isEmpty() ) { 
+		if( extension.length > 0 ) { 
 			for( e in extension ) {
 				var t = Xml.createElement( "extension" );
 				t.set( "application", e.application );
@@ -165,7 +160,7 @@ class XSPFTrack {
 		for( e in x.elements() ) {
 			var v = e.firstChild().nodeValue;
 			switch( e.nodeName ) {
-			case "location" : t.location.add( v );
+			case "location" : t.location.push( v );
 			case "identifier" : t.identifier = v;
 			case "title" : t.title = v;
 			case "creator" : t.creator = v;
@@ -175,9 +170,9 @@ class XSPFTrack {
 			case "album" : t.album = v;
 			case "trackNum" : t.trackNum = v;
 			case "duration" : t.duration = Std.parseInt(v);
-			case "link" : t.link.add( { rel : e.get("rel"), content : v } );
-			case "meta" : t.meta.add( { rel : e.get("rel"), content : v } );
-			case "extension" : t.extension.add( { application : e.get("application") , content : e.firstElement() } ); 
+			case "link" : t.link.push( { rel : e.get("rel"), content : v } );
+			case "meta" : t.meta.push( { rel : e.get("rel"), content : v } );
+			case "extension" : t.extension.push( { application : e.get("application") , content : e.firstElement() } ); 
 			}
 		}
 		return t;
@@ -186,6 +181,24 @@ class XSPFTrack {
 }
 
 
+/*
+@:forward
+abstract XSPFTracklist(Array<XSPFTrack>) {
+	public inline function new() {}
+	public inline function toXml() : Xml {
+		var x = Xml.createElement( "trackList" );
+		for( t in this.iterator() ) x.addChild( t.toXml() );
+		return x;
+	}
+	public static function parse( x : Xml ) : XSPFTracklist {
+		var l = new XSPFTracklist();
+		for( e in x.elements() ) l.push( XSPFTrack.parse( e ) );
+		return l;
+	}
+}
+*/
+
+/*
 class XSPFTracklist extends List<XSPFTrack> {
 	
 	public function toXml() : Xml {
@@ -196,11 +209,12 @@ class XSPFTracklist extends List<XSPFTrack> {
 	
 	public static function parse( x : Xml ) : XSPFTracklist {
 		var l = new XSPFTracklist();
-		for( e in x.elements() ) l.add( XSPFTrack.parse( e ) );
+		for( e in x.elements() ) l.push( XSPFTrack.parse( e ) );
 		return l;
 	}
 	
 }
+*/
 
 
 class XSPFPlaylist {
@@ -280,12 +294,12 @@ class XSPFPlaylist {
 		without breaking XSPF validation. 
 		xspf:playlist elements MAY contain zero or more link elements.
 	*/
-	public var link : List<Link>;
+	public var link : Array<Link> = [];
 	
 	/**
 		The meta element allows metadata fields to be added to XSPF.
 	*/
-	public var meta : List<Meta>;
+	public var meta : Array<Meta> = [];
 	
 	/**
 		Ordered list of xspf:track elements to be rendered.
@@ -294,12 +308,10 @@ class XSPFPlaylist {
 		If an xspf:track element cannot be rendered, a user-agent MUST skip to the next xspf:track
 		element and MUST NOT interrupt the sequence.
 	*/
-	public var tracklist : XSPFTracklist;
+	//public var tracklist : XSPFTracklist;
+	public var tracklist : Array<XSPFTrack> = [];
 	
-	public function new() {
-		meta = new List();
-		link = new List();
-	}
+	public function new() {}
 	
 	public function toXml() : Xml {
 		if( tracklist == null )
@@ -316,21 +328,23 @@ class XSPFPlaylist {
 		XSPFPlaylist.attach( x, this, 'date' );
 		XSPFPlaylist.attach( x, this, 'license' );
 		XSPFPlaylist.attach( x, this, 'attribution' );
-		if( !link.isEmpty() ) { 
+		if( link.length > 0 ) { 
 			for( e in link ) {
 				var l = XSPFPlaylist.createElement( "link", e.content);
 				l.set( "rel", e.rel );
 				x.addChild( l );
 			}
 		}
-		if( !meta.isEmpty() ) { 
+		if( meta.length > 0 ) { 
 			for( e in meta ) {
 				var m = XSPFPlaylist.createElement( "meta", e.content );
 				m.set( "rel", e.rel );
 				x.addChild( m );
 			}
 		}
-		x.addChild( tracklist.toXml() );
+		var trackList = Xml.createElement( "trackList" );
+		for( t in tracklist ) trackList.addChild( t.toXml() );
+		x.addChild( trackList );
 		return x;
 	}
 	
@@ -353,9 +367,9 @@ class XSPFPlaylist {
 				l.attribution = Xml.createElement( "attribution" );
 				for( c in e.elements() )
 					l.attribution.addChild( c );
-			case "link" : l.link.add( { rel : e.get("rel"), content : e.firstChild().nodeValue } );
-			case "meta"	: l.meta.add( { rel : e.get("rel"), content : e.firstChild().nodeValue } );
-			case "trackList" : l.tracklist = XSPFTracklist.parse( e );	
+			case "link" : l.link.push( { rel : e.get("rel"), content : e.firstChild().nodeValue } );
+			case "meta"	: l.meta.push( { rel : e.get("rel"), content : e.firstChild().nodeValue } );
+			case "trackList": for( e in e.elements() ) l.tracklist.push( XSPFTrack.parse(e) );
 			}
 		}
 		return l;
