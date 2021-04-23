@@ -1,6 +1,6 @@
 {
 	"name" : "xspf",
-	"version" : "1.1.3",
+	"version" : "1.1.4",
 	"url" : "https://github.com/tong/hxxspf",
 	"license" : "Public",
 	"tags" : ["xspf","playlist","xiph","spiff","xml","mp3","media","m3u"],
