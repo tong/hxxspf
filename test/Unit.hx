@@ -2,7 +2,7 @@
 import utest.Assert;
 import XSPFPlaylist;
 
-class Unit {
+class Unit implements utest.ITest {
 
 	static var pl = XSPFPlaylist.parse( Xml.parse( haxe.Resource.getString( "playlist" ) ).firstElement() );
 
@@ -43,17 +43,41 @@ class Unit {
 
 	function test_parseTracklist() {
 
+		Assert.equals( "ARUK", pl.tracklist[0].title );
+		Assert.equals( "http://download.disktree.net/music/tong/ARUK.mp3", pl.tracklist[0].location[0] );
+	
+		Assert.equals( "arturia_extended_5", pl.tracklist[1].title );
+		Assert.equals( "tong", pl.tracklist[1].creator );
+		Assert.equals( "http://download.disktree.net/music/tong/arturia_extended_5.mp3", pl.tracklist[1].location[0] );
+		Assert.equals( "http://spp.tt4.at", pl.tracklist[1].info );
+		Assert.equals( "http://download.disktree.net/music/sdk_sperrplan/GRAUESCHMIERE_cover.jpg", pl.tracklist[1].image );
+
+		Assert.equals( "ybot_e54_4_5", pl.tracklist[2].title );
+		Assert.equals( "DJ-mix by ytong at E54 (2005).", pl.tracklist[2].annotation );
+		Assert.equals( "http://www.spp.tt4.at", pl.tracklist[2].info );
+		Assert.equals( "http://download.disktree.net/music/tong/ybot_e54_4_5.mp3", pl.tracklist[2].location[0] );
+		Assert.equals( "http://download.disktree.net/music/sdk_sperrplan/GRAUESCHMIERE_cover.jpg", pl.tracklist[2].image );
+		Assert.equals( "http://disktree.example.org/namespace/version1", pl.tracklist[2].link[0].rel );
+		Assert.equals( "http://disktree.net/bar/foo.rdfs", pl.tracklist[2].link[0].content );
+
+		Assert.equals( "captions", pl.tracklist[2].meta[0].rel );
+		Assert.equals( "http://disktree.net/path.xml", pl.tracklist[2].meta[0].content );
+
+		Assert.equals( "http://example.com", pl.tracklist[2].extension[0].application );
+		//TODO Assert.equals( '<cl:clip start="25000" end="34500" />', pl.tracklist[2].extension[0].content.toString() );
+
+		/*
 		var i = 0;
 		for( track in pl.tracklist ) {
 			switch( i ) {
 			case 0 :
 				Assert.equals( "ARUK", track.title );
-				Assert.equals( "http://download.disktree.net/music/tong/ARUK.mp3", track.location.first() );
+				Assert.equals( "http://download.disktree.net/music/tong/ARUK.mp3", track.location[0] );
 
 			case 1 :
 				Assert.equals( "arturia_extended_5", track.title );
 				Assert.equals( "tong", track.creator );
-				Assert.equals( "http://download.disktree.net/music/tong/arturia_extended_5.mp3", track.location.first() );
+				Assert.equals( "http://download.disktree.net/music/tong/arturia_extended_5.mp3", track.location[0] );
 				Assert.equals( "http://spp.tt4.at", track.info );
 				Assert.equals( "http://download.disktree.net/music/sdk_sperrplan/GRAUESCHMIERE_cover.jpg", track.image );
 
@@ -61,7 +85,7 @@ class Unit {
 				Assert.equals( "ybot_e54_4_5", track.title );
 				Assert.equals( "DJ-mix by ytong at E54 (2005).", track.annotation );
 				Assert.equals( "http://www.spp.tt4.at", track.info );
-				Assert.equals( "http://download.disktree.net/music/tong/ybot_e54_4_5.mp3", track.location.first() );
+				Assert.equals( "http://download.disktree.net/music/tong/ybot_e54_4_5.mp3", track.location[0] );
 				Assert.equals( "http://download.disktree.net/music/sdk_sperrplan/GRAUESCHMIERE_cover.jpg", track.image );
 				var j = 0;
 				for( link in track.link ) {
@@ -92,6 +116,7 @@ class Unit {
 			}
 			i++;
 		}
+		*/
 	}
 
 	static function main() {
