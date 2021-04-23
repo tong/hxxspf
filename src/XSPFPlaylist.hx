@@ -3,7 +3,7 @@
 	The extension element allows non-XSPF XML to be included in XSPF documents.
 	The purpose is to allow nested XML, which the meta and link elements do not.
 */
-private typedef Extension = {
+typedef Extension = {
 	var application : String;
 	var content : Xml;
 }
@@ -11,7 +11,7 @@ private typedef Extension = {
 /**
 	The link element allows XSPF to be extended without the use of XML namespaces.
 */
-private typedef Link = {
+typedef Link = {
 	var rel : String;
 	var content : String;
 }
@@ -20,7 +20,7 @@ private typedef Link = {
 	The meta element allows metadata fields to be added to xspf:track elements.
 	xspf:track elements MAY contain zero or more meta elements.
 */
-private typedef Meta = {
+typedef Meta = {
 	var rel : String;
 	var content : String;
 }
@@ -179,43 +179,6 @@ class XSPFTrack {
 	}
 	
 }
-
-
-/*
-@:forward
-abstract XSPFTracklist(Array<XSPFTrack>) {
-	public inline function new() {}
-	public inline function toXml() : Xml {
-		var x = Xml.createElement( "trackList" );
-		for( t in this.iterator() ) x.addChild( t.toXml() );
-		return x;
-	}
-	public static function parse( x : Xml ) : XSPFTracklist {
-		var l = new XSPFTracklist();
-		for( e in x.elements() ) l.push( XSPFTrack.parse( e ) );
-		return l;
-	}
-}
-*/
-
-/*
-class XSPFTracklist extends List<XSPFTrack> {
-	
-	public function toXml() : Xml {
-		var x = Xml.createElement( "trackList" );
-		for( t in iterator() ) x.addChild( t.toXml() );
-		return x;
-	}
-	
-	public static function parse( x : Xml ) : XSPFTracklist {
-		var l = new XSPFTracklist();
-		for( e in x.elements() ) l.push( XSPFTrack.parse( e ) );
-		return l;
-	}
-	
-}
-*/
-
 
 class XSPFPlaylist {
 	
