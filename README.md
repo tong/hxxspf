@@ -1,8 +1,6 @@
-
 # HXXSPF
 
 Haxe implementation of [XSPF](http://xspf.org/) ("spiff"), the XML format for sharing playlists.
-
 
 * It is free and open -- No proprietary lock-in.
 * It is portable -- You should be able to send a playlist to your friend and have it work.
