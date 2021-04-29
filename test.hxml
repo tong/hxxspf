@@ -1,46 +1,35 @@
 -lib xspf
 -lib utest
+-lib test-adapter
 -cp test
--main Unit
+# -main Unit
 -dce no
 -resource test/playlist.xml@playlist
 --each
 
-#--next
-#-cpp bin/cpp
-#-cmd mv bin/cpp/Unit bin/unit
+--next
+-x Unit
 
 #--next
-#-cs bin/cs
-##-cmd mv bin/cs/bin/Unit.exe bin/unit.exe
+#-cpp test/cpp
+#-cmd mv test/cpp/Unit test/unit
 
-#--next
-#-hl bin/unit.hl
+# --next
+# -hl test/unit.hl
 
 #--next
 #-hl bin/unit.c
 #-cmd gcc -o bin/unit.hlc libhl.so bin/unit.c -I/home/tong/src/hl
 
-#--next
-#-java bin/java
-#-cmd mv bin/java/Unit.jar bin/unit.jar
+# --next
+# -js test/unit.js
 
---next
--js test/unit.js
+# --next
+# -neko test/unit.n
 
-#--next
-#-lua bin/unit.lua
-
-#--next
-#-neko bin/unit.n
-
---next
--js test/unit.node.js
--lib hxnodejs
-
-#--next
-#-php bin
-#-D php-front=unit.php
+# --next
+# -js test/unit.node.js
+# -lib hxnodejs
 
 #--next
 #-python bin/unit.py
