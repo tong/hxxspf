@@ -1,10 +1,9 @@
--lib xspf
--lib utest
--lib test-adapter
--cp test
+--class-path src
+--class-path test
+--library utest
 # -main Unit
--dce no
--resource test/playlist.xml@playlist
+--dce no
+--resource test/playlist.xml@playlist
 --each
 
 --next

@@ -2,8 +2,8 @@
 	<title>XSPF Example Playlist</title>
 	<creator>tong</creator>
 	<annotation>This is an xspf-playlist example for testing.</annotation>
-	<info>http:/xspf.org/xspf-v1.html</info>
-	<location>http:/xspf.disktree.net/xspf_sample.xml</location>
+	<info>http://xspf.org/xspf-v1.html</info>
+	<location>http://xspf.disktree.net/xspf_sample.xml</location>
 	<identifier>20eabe5d64b0e216796e834f52d61fd0b70332fc</identifier>
 	<image>http://download.disktree.net/music/sdk_sperrplan/GRAUESCHMIERE_cover.jpg</image>
 	<date>2008-01-08T17:10:23-05:00</date>
